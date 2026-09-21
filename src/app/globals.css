@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/*
+ * Basera design tokens.
+ * Palette is drawn from Multan's blue-pottery (kashigari) tilework — deep
+ * ink navy + kashi teal as the working pair, with a warm gold reserved for
+ * "featured" moments. Deliberately not the warm-cream/terracotta or
+ * near-black/neon combinations that generic AI-generated real-estate UIs
+ * tend to default to.
+ */
+ @theme{
+  --color-ink: #0f2439;
+  --color-ink-soft: #3d5670;
+  --color-ink-muted: #8298ac;
+  --color-ink-deep: #081726;
+
+  --color-teal: #128f80;
+  --color-teal-dark: #0d7568;
+  --color-teal-light: #e7f6f3;
+
+  --color-gold: #c6902e;
+  --color-gold-dark: #a8781f;
+  --color-gold-light: #fbf3e4;
+
+  --color-canvas: #f6f7f4;
+  --color-surface: #ffffff;
+  --color-line: #e3e6df;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter",
+    "Helvetica Neue", Arial, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(15, 36, 57, 0.04), 0 8px 24px -12px rgba(15, 36, 57, 0.18);
+  --shadow-card-hover: 0 4px 10px rgba(15, 36, 57, 0.06), 0 16px 36px -12px rgba(15, 36, 57, 0.24);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Consistent, visible keyboard focus ring across custom controls. */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+}
+
+/* Small, purposeful motion used by Modal and the hero's entrance. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+.basera-property-marker {
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 9999px;
+  background: var(--color-ink, #0f2439);
+  color: white;
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.basera-property-marker:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+.basera-property-marker:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
